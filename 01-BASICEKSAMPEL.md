@@ -58,3 +58,134 @@ methods: {
   }
 });
 ```
+### Hvad har vi adgang til fra en vue instance
+Vi har adgang til det der er i data, og også det som er i metoderne.
+
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ sayHello() }}</p>
+</div>
+```
+js  
+```
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!'
+  }, 
+  methods: {
+  	sayHello: function() {
+    	return 'Hello!';
+    }
+  }
+});
+```
+### Er det muligt at få adgang til data objektet fra en metode i en vue instance
+Ja, med this. this virker kun i vue instancen, og ikke i template.  
+js  
+```
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!'
+  }, 
+  methods: {
+  	sayHello: function() {
+    	return this.title;
+    }
+  }
+});
+```
+### Binding to attributes
+Det er ikke muligt at bruge {{}} på html elementer.  
+Brug det directiv, der hedder v-bind.  
+
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+</div>
+```
+js  
+```
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!',
+    link: 'http://google.com'
+  }, 
+  methods: {
+  	sayHello: function() {
+    	return this.title;
+    }
+  }
+});
+```
+
+### Hvad er directives?
+Det er en instruktion, du placer i din kode. Der binder noget til dine data eller funktioner i vuejs instancen. Se ovenstående eksempel.  
+
+### Slå rerender fra
+Hvis vi vil beholde vores title.  
+v-once render kun indholdet en gang. Det vil ikke blive rerenderet, hvis det ændrer sig senere.  
+
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <h1 v-once>{{title}}</h1>
+  <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+</div>
+```
+js
+```
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!',
+    link: 'http://google.com'
+  }, 
+  methods: {
+  	sayHello: function() {
+    this.title = 'Hello!';
+    	return this.title;
+    }
+  }
+});
+```
+### Output raw HTML
+Brug kun hvis du ved at linket kommer fra et sikkeret sted for at undgå xss.  
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <h1 v-once>{{title}}</h1>
+  <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+  <hr>
+  <p v-html='finishedLink'></p>
+</div>
+```
+js
+```
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!',
+    link: 'http://google.com',
+    finishedLink: '<a href="http://google.com">Google</a>'
+  }, 
+  methods: {
+  	sayHello: function() {
+    this.title = 'Hello!';
+    	return this.title;
+    }
+  }
+});
+```
