@@ -406,8 +406,425 @@ new Vue({
 })
 ```
 ### Exercise Events
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
+<div id="exercise">
+    <!-- 1) Show an alert when the Button gets clicked -->
+    <div>
+        <button v-on:click="alertMe">Show Alert</button>
+    </div>
+    <!-- 2) Listen to the "keydown" event and store the value in a data property (hint: event.target.value gives you the value) -->
+    <div>
+        <input type="text" v-on:keydown="getValues">
+        <p>{{ value }}</p>
+    </div>
+    <!-- 3) Adjust the example from 2) to only fire if the "key down" is the ENTER key -->
+    <div>
+        <input type="text" v-on:keydown.enter="getValues">
+        <p>{{ value }}</p>
+    </div>
+</div>
+```
+js
+```
+new Vue({
+	el: '#exercise',
+  data: {
+  	value: 0
+   },
+  methods: {
+  	getValues: function(event) {
+    	this.value = event.target.value;
+    },
+   	alertMe: function() {
+    	alert('Alert!')
+    }
+  }
+})
+```
+### Templates
+Det er muligt at arbejde med javascript i templates.  
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
+<div id="app">
+  <button v-on:click="increase(2, $event)">Click Me</button>
+  <button v-on:click="counter++">Click Me</button>
+  
+  <p>{{counter}}</p>
+  <p>{{counter * 2 > 10 ? 'Greater than 10' : 'Smaler than 10'}}</p>
+  
+  <p v-on:mousemove="updateCoordinates">
+    Coordinates: {{x}} / {{y}}
+    - <span v-on:mousemove.stop>DEAD SPOT</span>  
+  </p>
+  <input type="text" v-on:keyup.enter.space="alertMe">
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	counter: 0,
+    x: 0,
+    y: 0,
+  },
+  methods: {
+  	increase: function(step, event) {
+    	this.counter += step;
+    },
+    updateCoordinates: function(event) {
+    	this.x = event.clientX;
+      this.y = event.clientY;
+    },
+   	alertMe: function() {
+    	alert('Alert!')
+    }
+  }
+})
+```
+### Useing two way binding
+v-model - Sæt 2 way binding op mellem input feltet og den property du vil binde i begge retninger.  
+Opdater name i data, og i alle de komponenter, der bruger name.  
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <input type="text" v-model="name">
+  <p>{{name}}</p>
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	name: 'Max',
+  },
+  methods: {
+  	
+  }
+})
+```
+### Computed - Reacting to changes with computed properties
+computed - Kan bruges i en vue instance.  
+Bruges som en property der er gemt i data objektet.  
+Alt som gemmes i computed kan bruges som i et data objekt.  
+result(methods) kaldes hver gang der renderes. Så brug den, hvis du ikke vil cache.  
+computed kaldes ikke hver gang der renderes.  
+Bruges ved synkron kode dvs ikke hvis du skal lave et fetch til en server.  
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="counter++">Increase</button>
+  <button v-on:click="counter--">Decrease</button>
+  <button v-on:click="secoundCounter++">Increase Secound</button>
+  <p>Counter: {{counter}} | {{secoundCounter}}</p>
+  <p>Result: {{result()}} | {{output}}</p>
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	counter: 0,
+    secoundCounter: 0,
+  },
+  computed: {
+  	output: function() {
+    console.log('computed')
+    	return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+    }
+  },
+  methods: {
+  	result: function() {
+    console.log('method')
+    	return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+    }
+  }
+ });
+```
+### Alternatives to computed - watch
+watch i vue instance. Udfører kode når data ændrer sig.  
+counter skal match en data property.  
+value er det parameter som vuejs bruger til de ændrede parameter.  
+Brug computed når du kan er bedre optimeret end watch.  
+Bruges ved asynkron kode.  
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="counter++">Increase</button>
+  <button v-on:click="counter--">Decrease</button>
+  <button v-on:click="secoundCounter++">Increase Secound</button>
+  <p>Counter: {{counter}} | {{secoundCounter}}</p>
+  <p>Result: {{result()}} | {{output}}</p>
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	counter: 0,
+    secoundCounter: 0,
+  },
+  computed: {
+  	output: function() {
+    console.log('computed')
+    	return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+    }
+  },
+  watch: {
+  	counter: function(value) {
+    	var vm = this;
+      setTimeout(function() {
+      	vm.counter = 0;
+      }, 2000);
+    }
+  },
+  methods: {
+  	result: function() {
+    console.log('method')
+    	return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+    }
+  }
+ });
+```
+### Spar tid med shorthands
+For Event så kan v-on erstattes med @
+v-on:click --> @click  
+
+v-bind:href --> :href  
+
+### Exercise
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="exercise">
+    <!-- 1) Show a "result" of 'not there yet' as long as "value" is not equal to 37 - you can change "value" with the buttons. Print 'done' once you did it -->
+    <div>
+        <p>Current Value: {{ value }}</p>
+        <button @click="value += 5">Add 5</button>
+        <button @click="value += 1">Add 1</button>
+        <p>{{ result }}</p>
+    </div>
+    <!-- 2) Watch for changes in the "result" and reset the "value" after 5 seconds (hint: setTimeout(..., 5000) -->
+    <div>
+        <input type="text">
+        <p>{{ value }}</p>
+    </div>
+</div>
+```
+js
+```
+new Vue({
+	el: '#exercise',
+  data: {
+  	value: 0,
+    
+  },
+  computed: {
+  	result: function() {
+    console.log('computed')
+    	return this.value > 37 ? 'done' : 'not there yet';
+    }
+  },
+  watch: {
+  	value: function(value) {
+    	var vm = this;
+      setTimeout(function() {
+      	vm.value = 0;
+      }, 5000);
+    }
+  },
+  
+ });
+```
+### Basic dynamic styling with CSS classes
+:bind - bind the class.  
+Returner et objekt med styling fra computed.  
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <div 
+    class="demo" 
+    @click="attachRed = !attachRed"
+    :class="divClasses"
+    >
+  </div>
+  
+  <div class="demo" :class="{red: attachRed}"></div>
+  <div class="demo"></div>
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	attachRed: false
+  }, 
+  computed: {
+  	divClasses: function() {
+    	return {
+      	red: this.attachRed,
+        blue: !this.attachRed
+      }
+    }
+  }
+});
+```
+css
+```
+.demo {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  display: inline-block;
+  margin: 10px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+```
+### Dynamic styling with variables
+html
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <div 
+    class="demo" 
+    @click="attachRed = !attachRed"
+    :class="divClasses"
+    >
+  </div>
+  
+  <div class="demo" :class="{red: attachRed}"></div>
+  <div class="demo" :class="color"></div>
+  <hr>
+  <input type="text" v-model="color">
+</div>
+```
+js
+```
+new Vue({
+	el: '#app',
+  data: {
+  	attachRed: false,
+    color: 'green',
+  }, 
+  computed: {
+  	divClasses: function() {
+    	return {
+      	red: this.attachRed,
+        blue: !this.attachRed
+      }
+    }
+  }
+});
+```
+css
+```
+.demo {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  display: inline-block;
+  margin: 10px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+```
+### CSS dynamic styling without CSS classes
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <div class="demo" :style="{backgroundColor: color}"></div>
+  
+  <div class="demo" :style="myStyle"></div>
+  <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+  
+  <input type="text" v-model="color">
+  <input type="text" v-model="width">
+</div>
+```
+js  
+```
+new Vue({
+	el: '#app',
+  data: {
+  	color: 'grey',
+    width: 100,
+  }, 
+  computed: {
+  	myStyle: function() {
+    	return {
+      	backgroundColor: this.color,
+        width: this.width + 'px'
+      };
+    }
+  }
+  
+});
+```
+html  
+```
+.demo {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  display: inline-block;
+  margin: 10px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+```
+### Elements with array syntax
 
 
 
