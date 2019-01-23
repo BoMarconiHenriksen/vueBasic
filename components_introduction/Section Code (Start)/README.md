@@ -26,3 +26,12 @@ Det er muligt at importer en komponent i script taget.
     }
 </script>
 ```
+##### scoped
+Det er muligt i style at bruge scope til at ændre css for kun den ene komponent.  
+```
+<style scoped>
+    div {
+        border: 1px solid blue;
+    }
+</style>
+```
