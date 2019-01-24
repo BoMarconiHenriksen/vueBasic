@@ -1,11 +1,21 @@
 <template>
     <div>
-        <p>This is a quote!</p>
+        <div class="title">
+            <slot name="title"></slot>
+            <span style="color: #ccc"><slot name="subtitle">The subtitle</slot></span>
+        </div>
+        <hr>
+        <div>
+            <slot></slot>
+        </div>
+        
     </div>
 </template>
 
 <script>
-
+    export default {
+       
+    }
 </script>
 
 <style scoped>
@@ -15,5 +25,13 @@
         padding: 30px;
         margin: 30px auto;
         text-align: center;
+    }
+    
+    h2 {
+        color: red;
+    }
+
+    .title {
+        font-style: italic;
     }
 </style>
