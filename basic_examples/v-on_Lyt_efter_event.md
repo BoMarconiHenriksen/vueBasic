@@ -27,7 +27,7 @@ methods: {
   }
 });
 ```
-### Listening to events with v-on
+### Listening to click events with v-on
 Lytter efter en event. Tager et argument. Den event som den skal lytte efter eks. click.  
 Derefter den funktion, der skal kaldes.  
 html  
