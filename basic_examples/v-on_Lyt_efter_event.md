@@ -3,6 +3,9 @@ v-on - Fortæller at vue skal lytte til en event eks. v-on:input="changeTitle" l
 Metoden skrives i vue instancen med keywordet methods:  
 Methods er et objekt, hvor du kan skrive de metoder der skal bruges i templaten og vue instancen.  
 
+### Shorthand
+v-on:click --> @click
+
 ##### this.title - referer til data objektet.  
 html
 ```
