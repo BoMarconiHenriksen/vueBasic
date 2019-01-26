@@ -2,6 +2,9 @@
 Det er ikke muligt at bruge {{}} på html elementer.  
 Brug det directiv, der hedder v-bind.  
 
+### Shorthand
+v-bind:href --> :href
+
 html  
 ```
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
