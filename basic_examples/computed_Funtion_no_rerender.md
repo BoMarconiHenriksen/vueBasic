@@ -4,7 +4,9 @@ Bruges som en property der er gemt i data objektet.
 Alt som gemmes i computed kan bruges som i et data objekt.  
 result(i methods) kaldes hver gang der renderes. Så brug den, hvis du ikke vil cache.  
 ##### computed kaldes ikke hver gang der renderes.  
+##### Rerenders kun, hvis data ændres.  
 Bruges ved synkron kode dvs ikke hvis du skal lave et fetch til en server.  
+Et godt alternativ til filter(Hvis data skal ændres. Da filter rerender, og det kan give dårlig performance.  
 html
 ```
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
