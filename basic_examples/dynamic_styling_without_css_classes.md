@@ -7,7 +7,7 @@ html
   <div class="demo" :style="{backgroundColor: color}"></div>
   
   <div class="demo" :style="myStyle"></div>
-  <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+  <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div> <-- Elements with array syntax. -->
   
   <input type="text" v-model="color">
   <input type="text" v-model="width">
