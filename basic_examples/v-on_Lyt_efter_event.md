@@ -27,3 +27,29 @@ methods: {
   }
 });
 ```
+### Listening to events with v-on
+Lytter efter en event. Tager et argument. Den event som den skal lytte efter eks. click.  
+Derefter den funktion, der skal kaldes.  
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="increase">Click Me</button>
+  <p>{{counter}}</p>
+</div>
+```
+js  
+```
+new Vue({
+	el: '#app',
+  data: {
+  	counter: 0,
+  },
+  methods: {
+  	increase: function() {
+    	this.counter++;
+    }
+  }
+})
+```
