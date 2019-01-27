@@ -25,6 +25,35 @@ el: '#app',
   }
 });
 ```
+### DOM Interaction
+{{}} = string interpolation  
+
+vue laver en template baseret på html koden, gemmer det internt, og bruger templaten til at lave den rigtige html kode, som renderes i DOMen.  
+vuejs instancen tager vores html kode, laver en template, render den og viser den endelige kode som renderes(eks. med ændre titlen.).  
+
+Vi har adgang til det der er i data, og også det som er i metoderne.  
+
+html  
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+<div id="app">
+  <p>{{ sayHello() }}</p>
+</div>
+
+js  
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World!'
+  }, 
+  methods: {
+  	sayHello: function() {
+    	return 'Hello!';
+    }
+  }
+});
+```
 ### Hvad har vi adgang til fra en vue instance
 Vi har adgang til det der er i data, og også det som er i metoderne.
 
