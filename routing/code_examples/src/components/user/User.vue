@@ -13,7 +13,9 @@
     export default {
         methods: {
             navigateToHome() {
-                this.$router.push('/'); /* Pusher det på stacks af de eksisterende routes. Gør at frem og tilbage virker. */
+                /* this.$router.push('/'); */ /* Pusher det på stacks af de eksisterende routes. Gør at frem og tilbage virker. */
+                /* this.$router.push( { path: '/' } ); */ /* en anden mulighed. */
+                this.$router.push( { name: 'home' } ); /* en tredje mulighed. name: 'home' skal tilføjes i routes.js */
             }
         }
     }

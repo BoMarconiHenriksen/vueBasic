@@ -1,3 +1,7 @@
+# Loading routes lazy
+Del din bundlede fil op i flere filer så dele af navigation kun hentes når den skal bruges.  
+##### routes.js
+```
 /* 
 import User from './components/user/User.vue';
 import UserStart from './components/user/UserStart.vue';
@@ -50,3 +54,4 @@ export const routes = [
     { path: '/redirect-me', redirect: { name: 'home' } }, /* Til redirect. Giv et objekt med til en named route. */
     { path: '*', redirect: '/' } /* Redirecter alle andre routes. */
 ];
+```
