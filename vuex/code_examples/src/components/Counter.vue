@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="btn btn-primary" @click="increment(100)">Increment</button>
-        <button class="btn btn-primary" @click="decrement(100)">Decrement</button>
+        <button class="btn btn-primary" @click="decrement(50)">Decrement</button>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
                 'increment',
                 'decrement',
             ])
-            /* action gør det her. Vi behøver ikke at skrive det her. */
+            /* actions gør det her. Vi behøver ikke at skrive det her. */
             //increment(by) { /* Kan give et parameter med. */
             //    this.$store.dispatch('increment', by);
             //}

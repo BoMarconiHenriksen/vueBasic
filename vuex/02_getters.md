@@ -1,6 +1,7 @@
 # Using getters
 I stedet for direkte at tilgå state så kan vi lave en getter.  
 En getter vil hente state fra store og lave de udregninger, der skal gøres, og så henter komponenten resultatet fra getters.  
+Getters opdateres automatisk når staten opdateres.  
 ##### I store laves en getter.  
 ```
 export const store = new Vuex.Store({

@@ -1,3 +1,15 @@
+# Using separate files
+Hvis du har properties som ikke hører til et modul f.eks. en heading.  
+I store folder laves en javascript fil.  
+Dine modules kan du også splitte op i filer, hvis det er.  
+##### actions.js
+```
+export const updateValue = ({ commit }, payload) => {
+    commit('updateValue', payload);
+};
+```
+##### store.js
+```
 import Vue from 'vue';
 import Vuex from 'vuex';
 import counter from './modules/counter';
@@ -18,3 +30,4 @@ export const store = new Vuex.Store({
         counter
     }
 });
+```
