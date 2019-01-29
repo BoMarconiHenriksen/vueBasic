@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
+import Vuelidate from 'vuelidate';
 
 import router from './router'
 import store from './store'
 
+Vue.use(Vuelidate);
+
 axios.defaults.baseURL = 'https://vue-update.firebaseio.com'
 // axios.defaults.headers.common['Authorization'] = 'fasfdsa'
-axios.defaults.headers.get['Accepts'] = 'application/json'
+// axios.defaults.headers.get['Accepts'] = 'application/json'
 
 const reqInterceptor = axios.interceptors.request.use(config => {
   console.log('Request Interceptor', config)
