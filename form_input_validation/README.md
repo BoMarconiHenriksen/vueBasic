@@ -11,3 +11,4 @@ Vue.use(Vuelidate);
 ```
 Det er nu muligt at tilføje validations property til vue instancen. Se signup.vue  
 
+https://monterail.github.io/vuelidate/  
